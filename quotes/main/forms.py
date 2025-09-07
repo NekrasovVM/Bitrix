@@ -1,8 +1,8 @@
 from django import forms
 
-# source_type_choises = ((1, "Фильм"), (2, "Книга"))
 source_type_choises = {1: "Фильм", 2: "Книга"}
 
+# Форма для цитаты
 class QuoteForm(forms.Form):
     text = forms.CharField(
         widget=forms.Textarea, 
@@ -31,8 +31,3 @@ class QuoteForm(forms.Form):
     )
     required_css_class = "field"
     error_css_class = "error"
-
-    # name = forms.CharField(min_length=3, widget=forms.TextInput(attrs={"class":"myfield"}))
-    # age = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={"class":"myfield"}))
-    # required_css_class = "field"
-    # error_css_class = "error"

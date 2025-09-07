@@ -9,10 +9,11 @@ from random import choices
 from .forms import QuoteForm
 from .models import Quote, acreate_quote
 
+# главная страница, выбор случайной цитаты и её вывод
 def index(request):
 
     weights = Quote.objects.all().values("id", "weight")
-    # total_weight = sum([o["weight"] for o in weights])
+    # выбор в соответствии с вероятностным распределением
     selected_id = choices([o["id"] for o in weights], weights=[o["weight"] for o in weights])[0]
 
     quote = Quote.objects.get(id=selected_id)
@@ -22,7 +23,9 @@ def index(request):
 
     return render(request, "index.html", context={"quote": quote})
 
+# добавления цитаты
 def addition(request):
+    # отправка формы
     if request.method == "POST":
         quoteform = QuoteForm(request.POST)
         if quoteform.is_valid():
@@ -33,11 +36,13 @@ def addition(request):
 
             
             authors_quotes = Quote.objects.filter(source=source)
-            if len(authors_quotes) > 2:
+            # Согласно ТЗ, у одного источника не должно быть одновременно больше трех цитат
+            if len(authors_quotes) > 2 :
                 return render(request, "error.html", {"error": "Один источник не может иметь более 3 цитат!"})
 
             try:
                 asyncio.run(acreate_quote(text, source, source_type, weight))
+            # обработка случая, если цитата уже есть в базе
             except IntegrityError as e:
                 print(e.args[0])
                 if 'UNIQUE constraint' in e.args[0]:
@@ -46,17 +51,21 @@ def addition(request):
             return redirect("/")
         else:
             return HttpResponse("Invalid data")
+    
+    # отрисовка страницы с формой
     else:
         quoteform = QuoteForm()
         return render(request, "addition.html", {"form": quoteform})
 
 def top(request):
+    # цитаты сортируются в порядке убывания лайков и отбираются 10 с наибольшим значением
     quotes = Quote.objects.order_by("-likes")[:10]
 
     print(quotes)
 
     return render(request, "top.html", context={"quotes": quotes})
 
+# обработчик кнопки лайка
 def like(request, id):
     quote = get_object_or_404(Quote, id=id)
     quote.likes += 1
@@ -65,6 +74,7 @@ def like(request, id):
 
     return redirect("/")
 
+# обработчик кнопки дизлайка
 def dislike(request, id):
     quote = get_object_or_404(Quote, id=id)
     quote.dislikes += 1

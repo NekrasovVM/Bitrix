@@ -1,5 +1,6 @@
 from django.db import models
 
+# Цитата
 class Quote(models.Model):
     text = models.CharField(max_length=256, unique=True)
     source = models.CharField(max_length=48)
