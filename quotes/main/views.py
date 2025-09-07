@@ -51,7 +51,7 @@ def addition(request):
         return render(request, "addition.html", {"form": quoteform})
 
 def top(request):
-    quotes = Quote.objects.order_by("-likes")
+    quotes = Quote.objects.order_by("-likes")[:10]
 
     print(quotes)
 
