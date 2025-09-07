@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+  color: white;
+}
+html, body{
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: url("../images/Lamp.jpg");
+  background-size: cover;
+}
+input{
+  width: 50%;
+  max-width: 500px;
+  background-color: transparent;
+}
+input[type="text"]{
+  right: 0;
+  width: 100%;
+}
+input[type="number"]{
+  right: 0;
+  width: fit-content;
+}
+div[class="content"]{
+  height: 100%;
+  place-items: center;
+  display: flex; 
+  justify-content: center; 
+}
+div[class="blockqoute"]{
+  margin: 0 auto;
+  width: 80%;
+}
+div[class="additional_items"]{
+  float: right;
+}
+div[class="additional_items"]{
+  float: right;
+}
+div[class="additional_items"] > *{
+  margin-left: 10px;
+}
+footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+form{width: 80%;}
+form[class="likeform"]{
+  display: inline;
+}
+textarea{
+  font-style: italic;
+  width: 100%;
+  background-color: transparent;
+}
+select{
+  background-color: transparent;
+}
+p[class="label"]{
+  display: inline;
+}
+button{
+  background-color: transparent;
+}
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Лучшее {% endblock title %}
+{% block header %} Топ-10 цитат {% endblock header %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Текст цитаты</th>
+                <th>Источник</th>
+                <th>Лайков</th>
+            </tr>
+        </thead>
+        {% for quote in quotes %}
+            <tr>
+                <td>{{quote.text}}</td>
+                <td>{{quote.source}}</td>
+                <td>{{quote.likes}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

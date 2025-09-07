@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Главная {% endblock title %}
+{% block header %} Случайная цитата {% endblock header %}
+{% block content %} 
+    <div class="blockquote">
+        <div><h2><q>
+                {{quote.text}}
+        </q><h2></div>
+        <div class="author">
+            <p align="right"> — {{quote.source}}</p>
+        </div>
+        <div class="additional_items">
+            <p align="right", style="display: inline;"> Просмотров: {{quote.views}}</p>
+            <form class="likeform" action="{% url 'like' quote.id %}" method="POST">
+                {% csrf_token %}
+
+                <button type="submit" name="like">Лайк</button>
+                <p class="label">{{quote.likes}} лайков</p>
+            </form>
+
+            <form class="likeform" action="{% url 'dislike' quote.id %}" method="POST">
+                {% csrf_token %}
+
+                <button type="submit" name="dislike">Дизлайк</button>
+                <p class="label">{{quote.dislikes}} дизлайков</p>
+            </form>
+
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Добавление{% endblock title %}
+{% block header %}Форма добавления цитаты{% endblock header %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+        {% for field in form %}
+        <div>
+            {{field.label_tag}}
+            <div class="formfield">{{field}}</div>
+        </div>
+        {% endfor %}
+        </div>
+        <input type="submit" value="Добавить" >
+    </form>
+{% endblock content %}
