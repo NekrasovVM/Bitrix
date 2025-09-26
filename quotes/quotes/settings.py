@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-79j^#==u84p9u_u%vu^lyqth2oks5e4)#vru!l&4h1mp8rv2f6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["nekra.pythonanywhere.com"]
+ALLOWED_HOSTS = [
+    "nekra.pythonanywhere.com",
+    "127.0.0.1"]
 
 
 # Application definition
